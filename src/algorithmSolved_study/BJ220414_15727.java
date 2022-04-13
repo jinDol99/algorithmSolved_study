@@ -9,7 +9,7 @@ public class BJ220414_15727 {
 		
 		if(L % 5 == 0)
 			System.out.println(L / 5);
-		else 
+		else
 			System.out.println((L / 5) + 1);
 	}
 }
