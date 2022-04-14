@@ -12,5 +12,6 @@ public class BJ220414_15727 {
 			System.out.println(L / 5);
 		else
 			System.out.println((L / 5) + 1);
+		System.out.println("가즈아ㅏㅏ앙아ㅏ");
 	}
 }
