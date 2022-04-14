@@ -5,6 +5,7 @@ public class BJ220414_15727 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("");
+		System.out.println("알콜 마렵다.");
 		int L = sc.nextInt();
 		
 		if(L % 5 == 0)
