@@ -1,9 +1,6 @@
 eclipse.preferences.version=1
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
-<<<<<<< HEAD
-=======
 org.eclipse.jdt.core.compiler.codegen.methodParameters=do not generate
->>>>>>> branch 'master' of https://github.com/jinDol99/algorithmSolved_study.git
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=15
 org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
 org.eclipse.jdt.core.compiler.compliance=15
