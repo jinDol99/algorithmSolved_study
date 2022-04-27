@@ -6,6 +6,8 @@ public class test {
 		System.out.println("abcd");
 		System.out.println("미유최고");
 		System.out.println("알콜 마렵다.");
+		System.out.println("1111");
+		System.out.println("1111");
 	}
 }
 
