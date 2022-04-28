@@ -10,6 +10,7 @@ public class CU220428_1255 {
 				System.out.printf("%.2f",a+i);
 				System.out.print(" ");
 				i+=0.01;
+				i++;
 			}
 		}
 	}
