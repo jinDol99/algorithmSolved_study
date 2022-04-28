@@ -1,4 +1,5 @@
 package algorithmSolved_study;
+
 import java.util.*;
 public class BJ220428_1964 {
 	public static void main(String[] args) {
