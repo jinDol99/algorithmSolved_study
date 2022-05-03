@@ -28,7 +28,6 @@ public class BJ220503_5613 {
 			if(in.equals("/")) {
 				result = result / b;
 			}
-
 		}
 		System.out.println(result);		
 	}
