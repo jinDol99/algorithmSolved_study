@@ -5,7 +5,6 @@ public class BJ220503_10178 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int count = sc.nextInt();
-		
 		int[] c = new int[count];
 		int[] v = new int[count];
 		for (int i = 0; i < c.length; i++) {
