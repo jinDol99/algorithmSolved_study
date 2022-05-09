@@ -18,7 +18,6 @@ public class BJ220510_17362 {
             case 5:         System.out.println("5");
             break;
         }
-        sc.close();
     }
 }
 /*					
