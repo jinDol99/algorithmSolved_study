@@ -6,10 +6,8 @@ public class BJ220511_2525 {
         int A = s.nextInt(); // 주어진 시간
         int B = s.nextInt(); // 주어진 분
         int C = s.nextInt(); // 요리 시간
-        int hour = C/60; // 요리 시간(H)
-        int min = C%60; // 요리 시간(M)
-        A += hour; // 시간 증가
-        B += min; // 분 증가
+        A += C/60; // 시간 증가
+        B += C%60; // 분 증가
         if (B >= 60) { // 분이 60분을 넘었을 때
             B -= 60;
             A += 1; // 시간을 1 증가
