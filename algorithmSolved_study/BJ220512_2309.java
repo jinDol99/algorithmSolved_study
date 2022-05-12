@@ -3,31 +3,32 @@ import java.util.*;
 public class BJ220512_2309 {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
-		int[] allNan = new int[9];
-		int sum = 0;
-        int a=0;
-        int b=0;
-		for (int i = 0; i < 9; i++) {
-			allNan[i] = s.nextInt();
-			sum += allNan[i];
+		int[] allNan = new int[9]; // 모든 난쟁이들 키 배열
+		int sum = 0; // 난쟁이들의 키의 합
+        int a=0; // 가짜 난쟁이1
+        int b=0; // 가짜 난쟁이2
+		for (int i = 0; i < 9; i++) { 
+			allNan[i] = s.nextInt(); // 모든 난쟁이들의 키 입력
+			sum += allNan[i]; // 입력된 난쟁이들의 키 전부 더하기
 		}
-		Arrays.sort(allNan);
-		sum -= 100;
-        finish:
-		for (int i=0; i<8; i++) {
-			for (int j=i+1; j<9; j++) {
+		Arrays.sort(allNan); // 오름차순으로 정렬
+		sum -= 100; // 전체 키에 100을 빼서 가짜 난쟁이 2명의 키의 합
+        finish: // 반복을 끝내기 위한 finish
+		for (int i=0; i<8; i++) { // 0~7까지
+			for (int j=i+1; j<9; j++) { // 1~8까지
 				if (allNan[i] + allNan[j] == sum) {
-                    a=i;
-                    b=j;
-                    break finish;
+					// 두 난쟁이 키의 합이 가짜 난쟁이들의 키의 합과 같을 경우
+                    a=i; // 가짜 난쟁이1의 위치 저장
+                    b=j; // 가짜 난쟁이2의 위치 저장
+                    break finish; // 모든 반복 종료
 				}
 			}
 		}
         for (int k = 0; k < 9; k++) {
-		    if(k == a || k == b) {
+		    if(k == a || k == b) { // 가짜 난쟁이1과 가짜 난쟁이2 스킵
 				continue;
             }
-			System.out.println(allNan[k]);
+			System.out.println(allNan[k]); // 진짜 일곱 난쟁이 출력
 		}
 	}
 }
