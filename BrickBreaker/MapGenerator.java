@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 public class MapGenerator 
 {
+	// s
 	public int map[][]; // 브릭 생성을 위한 배열
 	public int brickWidth; // 브릭의 가로
 	public int brickHeight; // 브릭의 세로

@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 public class Gameplay extends JPanel implements KeyListener, ActionListener
 {
+	// s
 	private boolean play = false; // 게임 시작 전
 	private int score = 0; // 점수
 	private int totalBricks = 48; // 공의 전체 갯수(남아있는 갯수)
