@@ -7,9 +7,8 @@ public class BJ220517_1159 {
 		String[] mem = new String[N];
 		int cnt = 0;
 		int say = 0;
-		for (int i = 0; i < mem.length; i++) {
+		for (int i = 0; i < mem.length; i++)
 			mem[i] = s.next();
-		}
 		for (int i = 97; i < 123; i++) {
 			for (int j = 0; j < mem.length; j++) {
 				if (mem[j].charAt(0) == i) {
