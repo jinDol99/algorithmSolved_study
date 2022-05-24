@@ -18,7 +18,7 @@ public class BJ220524_1920 {
 				Marr[i] = 0;
 			}
 		}
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < M; i++) {
 			System.out.println(Marr[i]);
 		}
 	}
