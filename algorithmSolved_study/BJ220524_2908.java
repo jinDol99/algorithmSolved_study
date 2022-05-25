@@ -19,3 +19,36 @@ public class BJ220524_2908 {
 			System.out.println(Br);
 	}
 }
+
+/*KGH
+ 
+  import java.util.Scanner;
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String a = sc.next();
+		String b = sc.next();
+		StringBuffer A = new StringBuffer(a);
+		StringBuffer B = new StringBuffer(b);
+		StringBuffer  ra = A.reverse();
+		StringBuffer rb = B.reverse();
+		String RA = ra.toString();
+		String RB = rb.toString();
+		int ia = Integer.parseInt(RA);
+		int ib = Integer.parseInt(RB);
+		int big = 0;
+		if(ia>ib) {
+			big = ia;
+		}
+		else {
+			big = ib;
+		}
+		System.out.println(big);
+			
+		
+		
+
+		}
+}	
+ */
