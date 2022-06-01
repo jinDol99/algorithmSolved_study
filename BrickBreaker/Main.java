@@ -6,7 +6,8 @@ import java.awt.event.*;
 import javax.swing.Timer;
 class Gameplay extends JPanel implements KeyListener, ActionListener
 {
-	private boolean play = false; // 게임 시작 전
+	
+	public boolean play = false; // 게임 시작 전
 	private int score = 0; // 점수
 	private int totalBricks = 48; // 블럭의 전체 갯수(남아있는 갯수)
 	private Timer timer; // 타이머
@@ -57,26 +58,24 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		g.setColor(Color.red); // 공의 색깔
 		g.fillOval(ballposX, ballposY, 20, 20);
 		// (공의 X 좌표, 공의 Y 좌표, 공의 좌우 길이, 공의 상하 길이)
-	
 		// when you won the game
 		if(totalBricks <= 0) // 남은 브릭의 갯수가 0개 이하일때(승리시)
-		{
-			 play = false;
-             ballXdir = 0; // 공의 X 이동을 0으로 (정지)
-     		 ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-     		 setVisible(false);
-     		 new RetryGame();
-		}
-		
+			{
+				play = false;
+		        ballXdir = 0; // 공의 X 이동을 0으로 (정지)
+		     	ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
+		     	new RetryGame();
+		     	setVisible(false);
+			}
 		// when you lose the game
 		if(ballposY > 670) // 공이 바닥 아래로 내려갔을 때(패배시)
-        {
-			 play = false;
-             ballXdir = 0; // 공의 X 이동을 0으로 (정지)
-     		 ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-     		 setVisible(false);
-     		 new RetryGame();
-        }
+		    {
+			    play = false;
+		        ballXdir = 0; // 공의 X 이동을 0으로 (정지)
+		        ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
+		     	new RetryGame();
+		     	setVisible(false);
+		     }
 		g.dispose(); // 현재의 Frame만 종료
 	}
 	public void keyPressed(KeyEvent e) // 특정 키를 눌렀을때
@@ -103,38 +102,24 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 				moveLeft(); // 스틱의 왼쪽 이동
 			}
         }
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) // Enter를 눌렀을 때
-		{
-			if(!play) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
-			{
-				play = true;
-				ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
-				ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
-				ballXdir = -1; // 공의 X 좌표 이동
-				ballYdir = 2; // 공의 Y 좌표 이동
-				playerX = 500; // 스틱의 X 좌표 위치로 재설정
-				score = 0; // 점수 0으로 재설정
-				totalBricks = 42; // 전체 브릭은 21개로
-				map = new MapGene(6, 8); 
-				// 브릭 세로로 3개, 가로로 7개 해서 총 21개
-				repaint(); // 재시작
-			}
-        }
+		
 	}
 	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
 	public void moveRight() // 오른쪽 방향키 눌렀을 때의 메소드
 	{
-		play = true; // 플레이중이라면
-		playerX+=20; // 스틱을 오른쪽으로 이동
-		direction = false;
+		 // 스틱을 오른쪽으로 이동
+			play = true; // 플레이중이라면
+			playerX+=20;
+			direction = false;
 	}
 	public void moveLeft() // 왼쪽 방향키 눌렀을 때의 메솓,
 	{
-		play = true; // 플레이중이라면
-		playerX-=20; // 스틱을 왼쪽으로 이동
-		direction = true;
+			play = true; // 플레이중이라면
+			playerX-=20;
+			direction = true;
 	}
+	
 	public void actionPerformed(ActionEvent e)  // 게임이 시작되었을 때
 	{
 		timer.start(); // 타이머 스타트
@@ -156,7 +141,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 				ballXdir = ballXdir + 1; // 공의 좌우 움직임 속도를 올림
 			}
 			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 30, 650, pl, 8)))
-			{
+			{ 
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
 				ballYdir = -ballYdir; // 공의 위아래 움직임 반전
 			}
@@ -228,8 +213,8 @@ class MapGene {
 				map[i][j] = 1; // 나중에 있을 브릭의 생성을 위한 모든 값에 1 넣기
 			}			
 		}
-		brickWidth = 540/col; // 브릭의 세로는 540/col이 된다.
-		brickHeight = 150/row; // 브릭의 가로는 150/row가 된다.
+		brickWidth = 800/col; // 브릭의 가로는 540/col이 된다.
+		brickHeight = 150/row; // 브릭의 세로는 150/row가 된다.
 	}	
 	public void draw(Graphics2D g) // 브릭 그리기
 	{
@@ -240,7 +225,7 @@ class MapGene {
 				if(map[i][j] > 0) // 어차피 모든 값에 1을 넣었기에 실질적으로 처음부터 끝까지 전부 실행
 				{
 					g.setColor(Color.yellow); // 브릭의 색깔
-					g.fillRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight); 
+					g.fillRoundRect(j * brickWidth + 80, i * brickHeight + 50, brickWidth, brickHeight, 20, 20); 
 					// 브릭의 범위(X 좌표, Y 좌표, 가로 길이, 세로 길이)
 
 					// this is just to show separate brick, game can still run without it
@@ -258,17 +243,19 @@ class MapGene {
 	}
 }
 public class Main {
-	public static void main(String[] args) {
+	public Main() {
 		JFrame obj=new JFrame(); // 게임창 생성
-		Gameplay gamePlay = new Gameplay(); // 게임 플레이 객체 생성
+		Gameplay gamePlay = new Gameplay();
 		obj.setBounds(0, 0, 1000, 700); // 나오는 창의 경계(왼쪽 끝 좌표, 위쪽 끝 좌표, 오른쪽 끝 좌표, 아래쪽 끝 좌표)
-		obj.setTitle("Breakout Ball"); // 게임 타이틀
+		obj.setTitle("Break Brick Game"); // 게임 타이틀
 		obj.setResizable(true); // 게임창의 크기 조절 불가능
 		obj.setVisible(true); // 창 보임
 		obj.setLocationRelativeTo(null);
 		obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창을 닫았을 때 메모리에서도 삭제
 		obj.add(gamePlay);
-        obj.setVisible(true);
+	}
+	public static void main(String[] args) {
+		new Main();
 	}
 }
 /*import java.awt.Color;

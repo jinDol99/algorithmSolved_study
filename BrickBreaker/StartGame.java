@@ -24,15 +24,7 @@ public class StartGame extends JFrame {
 		button.setVisible(true);
 		setVisible(true);
 		button.addActionListener((e)->{
-			JFrame obj = new JFrame();
-			Gameplay gamePlay = new Gameplay();
-			obj.setBounds(0, 0, 1000, 700);
-			obj.setTitle("Breakout Ball");
-			obj.setResizable(true);
-			obj.setVisible(true);
-			obj.setLocationRelativeTo(null);
-			obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			obj.add(gamePlay);
+			new Main();
 			setVisible(false);
 		}); 
 		setTitle("start");

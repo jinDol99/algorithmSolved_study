@@ -13,21 +13,18 @@ public class RetryGame extends JFrame {
 	public RetryGame() {
 		JPanel panel = new JPanel();
 		JFrame jF = new JFrame();
-		panel.add(but1);
-		panel.add(but2);
-		add(BorderLayout.SOUTH,panel);
-		panel.setBackground(Color.black);
+		but1.setBounds(400, 500, 150, 70);
+		but2.setBounds(600, 500, 150, 70);
+		setLayout(null);
+		but1.setVisible(false);
+		but2.setVisible(false);
+		add(but1);
+		add(but2);
+		repaint();
+		but1.setVisible(true);
+		but2.setVisible(true);
 		but1.addActionListener((e)->{
-			JFrame obj=new JFrame();
-			Gameplay gamePlay = new Gameplay();
-			obj.setBounds(0, 0, 1000, 700);
-			obj.setTitle("Breakout Ball");
-			obj.setResizable(true);
-			obj.setVisible(true);
-			obj.setLocationRelativeTo(null);
-			obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			obj.add(gamePlay);
-	        obj.setVisible(true);
+			new Main();
 			setVisible(false);
 		});
 		but2.addActionListener((e)->{
