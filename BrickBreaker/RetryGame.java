@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class RetryGame extends JFrame {
 	private JButton but1 = new JButton("Restart");
 	private JButton but2 = new JButton("End");
-	public RetryGame() { //
+	public RetryGame() { // ¤±¤±
 		JPanel panel = new JPanel();
 		JFrame jF = new JFrame();
 		but1.setBounds(400, 500, 150, 70);
