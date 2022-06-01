@@ -28,7 +28,7 @@ public class StartGame extends JFrame {
 			obj.add(gamePlay);
 	        obj.setVisible(true);
 			setVisible(false);
-		});
+		}); 
 		setTitle("start");
 		setSize(1000,700);
 		setVisible(true);
@@ -37,7 +37,7 @@ public class StartGame extends JFrame {
 		
 	}
 	public void homeframe() {
-		setTitle("1");//타이틀
+		setTitle("1"); //타이틀
 		setSize(1000,700);//프레임의 크기
 		setResizable(false);//창의 크기를 변경하지 못하게
 		setLocationRelativeTo(null);//창이 가운데 나오게
