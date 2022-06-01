@@ -26,10 +26,6 @@ public class StartGame extends JFrame {
 	        obj.setVisible(true);
 			setVisible(false);
 		});
-		JLabel label = new JLabel("Break Bick Game!");
-		label.setBounds(500, 350, 100, 50);
-		add(label);
-		label.setVisible(true);
 		setTitle("start");
 		setSize(1000,700);
 		setVisible(true);
