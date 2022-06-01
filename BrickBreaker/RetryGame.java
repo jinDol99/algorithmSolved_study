@@ -14,21 +14,14 @@ public class RetryGame extends JFrame {
 		JPanel panel = new JPanel();
 		JFrame jF = new JFrame();
 		but1.setBounds(400, 500, 150, 70);
-		but2.setBounds(600, 500, 150, 70);
 		setLayout(null);
 		but1.setVisible(false);
-		but2.setVisible(false);
 		add(but1);
-		add(but2);
 		repaint();
 		but1.setVisible(true);
-		but2.setVisible(true);
 		but1.addActionListener((e)->{
 			new Main();
 			setVisible(false);
-		});
-		but2.addActionListener((e)->{
-			System.exit(0);
 		});
 		setTitle("Restart");
 		setSize(1000,700);
