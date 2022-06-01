@@ -10,15 +10,15 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	private int score = 0; // 점수
 	private int totalBricks = 48; // 블럭의 전체 갯수(남아있는 갯수)
 	private Timer timer; // 타이머
-	private int delay=8; // 공 속도(숫자가 작을수록 딜레이가 덜 걸려 빨라짐)
+	private int delay = 8; // 공 속도(숫자가 작을수록 딜레이가 덜 걸려 빨라짐)
 	private int playerX = 500; // 스틱의 X 좌표
-	private int ballposX = 120; // 공의 X 좌표
-	private int ballposY = 350; // 공의 Y 좌표
+	private int ballposX = 500; // 공의 X 좌표
+	private int ballposY = 600; // 공의 Y 좌표
 	private int ballXdir = -1; // 공의 X 방향 이동의 속도(숫자가 커질수록 커짐)
-	private int ballYdir = -2; // 공의 Y 방향 이동의 속도(숫자가 커질수록 커짐)
+	private int ballYdir = 2; // 공의 Y 방향 이동의 속도(숫자가 커질수록 커짐)
 	private MapGene map;
-	public int tB = totalBricks;
-	public int pl = 100;
+	private int pl = 100;
+	private boolean direction = false;
 	public Gameplay()
 	{
 		map = new MapGene(6, 8); // 브릭의 갯수(세로 갯수, 가로 갯수)
@@ -46,7 +46,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		// the scores 		
 		g.setColor(Color.white); // 점수 색깔
 		g.setFont(new Font("serif",Font.BOLD, 25)); // 점수 폰트 및 크기
-		g.drawString("Score : "+score, 870,30); // (기본 점수, 점수 X 좌표, Y 좌표)
+		g.drawString("Score : "+score, 850,30); // (기본 점수, 점수 X 좌표, Y 좌표)
 		
 		// the paddle
 		g.setColor(Color.yellow); // 스틱 색깔
@@ -64,17 +64,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			 play = false;
              ballXdir = 0; // 공의 X 이동을 0으로 (정지)
      		 ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-             g.setColor(Color.RED); // 승리시 나오는 문구 색깔
-             g.setFont(new Font("serif",Font.BOLD, 30));
-             // 승리시 나오는 문구 포트와 크기
-             g.drawString("You Won", 260,300);
-             // 승리시 나오는 문구 및 X 좌표, Y 좌표
-             g.setColor(Color.RED);
-             // 승리시 나오는 문구 색깔
-             g.setFont(new Font("serif",Font.BOLD, 20));
-             // 승리시 나오는 문구 포트와 크기
-             g.drawString("Press (Enter) to Restart", 230,350);
-             // 승리시 나오는 문구 및 X 좌표, Y 좌표
+     		 setVisible(false);
+             new RetryGame();
 		}
 		
 		// when you lose the game
@@ -83,17 +74,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			 play = false;
              ballXdir = 0; // 공의 X 이동을 0으로 (정지)
      		 ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-             g.setColor(Color.RED); // 패배시 나오는 문구 색깔
-             g.setFont(new Font("serif",Font.BOLD, 30));
-             // 패배시 나오는 문구 포트와 크기
-             g.drawString("Game Over, Scores: "+score, 190,300);
-             // 패배시 나오는 문구(+점수) 및 X 좌표, Y 좌표
-             g.setColor(Color.RED);
-             // 패배시 나오는 문구 색깔
-             g.setFont(new Font("serif",Font.BOLD, 20));  
-             // 패배시 나오는 문구 포트와 크기
-             g.drawString("Press (Enter) to Restart", 230,350);
-             // 패배시 나오는 문구 및 X 좌표, Y 좌표
+     		 setVisible(false);
+             new RetryGame();
         }
 		g.dispose(); // 현재의 Frame만 종료
 	}
@@ -101,9 +83,9 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	{
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) // 오른쪽 방향키 입력
 		{        
-			if(playerX >= 1000) // 스틱이 오른쪽 벽에 닿아있으면
+			if(playerX >= 880) // 스틱이 오른쪽 벽에 닿아있으면
 			{
-				playerX = 1000; // 그 자리 그대로
+				playerX = 880; // 그 자리 그대로
 			}
 			else // 스틱이 오른쪽 벽에 닿아있지 않다면
 			{
@@ -126,18 +108,18 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			if(!play) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
 			{
 				play = true;
-				ballposX = 120; // 공의 X 좌표 기본 위치로 재설정
-				ballposY = 350; // 공의 Y 좌표 기본 위치로 재설정
+				ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
+				ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
 				ballXdir = -1; // 공의 X 좌표 이동
-				ballYdir = -2; // 공의 Y 좌표 이동
-				playerX = 310; // 스틱의 X 좌표 위치로 재설정
+				ballYdir = 2; // 공의 Y 좌표 이동
+				playerX = 500; // 스틱의 X 좌표 위치로 재설정
 				score = 0; // 점수 0으로 재설정
-				totalBricks = 21; // 전체 브릭은 21개로
-				map = new MapGene(3, 7); 
+				totalBricks = 42; // 전체 브릭은 21개로
+				map = new MapGene(6, 8); 
 				// 브릭 세로로 3개, 가로로 7개 해서 총 21개
 				repaint(); // 재시작
 			}
-        }		
+        }
 	}
 	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
@@ -145,30 +127,35 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	{
 		play = true; // 플레이중이라면
 		playerX+=20; // 스틱을 오른쪽으로 이동
+		direction = false;
 	}
 	public void moveLeft() // 왼쪽 방향키 눌렀을 때의 메솓,
 	{
 		play = true; // 플레이중이라면
 		playerX-=20; // 스틱을 왼쪽으로 이동
+		direction = true;
 	}
 	public void actionPerformed(ActionEvent e)  // 게임이 시작되었을 때
 	{
 		timer.start(); // 타이머 스타트
 		if(play) // 플레이중이라면
 		{			
-			if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 550, 30, 8))) 
+			if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 650, pl, 8))) 
 			{
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
 				ballYdir = -ballYdir; // 공의 위아래 움직임 반전
-				ballXdir = -2; // 공의 좌우 움직임 속도를 낮춤
+				if (direction == true)
+					ballXdir = -2; // 공의 좌우 움직임 속도를 낮춤
+				else if (direction == false)
+					ballXdir = 2;
 			}
-			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 70, 550, 30, 8)))
+			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 70, 650, pl, 8)))
 			{
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
 				ballYdir = -ballYdir; // 공의 위아래 움직임 반전
 				ballXdir = ballXdir + 1; // 공의 좌우 움직임 속도를 올림
 			}
-			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 30, 550, 40, 8)))
+			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 30, 650, pl, 8)))
 			{
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
 				ballYdir = -ballYdir; // 공의 위아래 움직임 반전
@@ -194,7 +181,6 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 							map.setBrickValue(0, i, j); // 브릭의 삭제..?
 							score+=5; // 점수 5점 증가
 							totalBricks--; // 전체 브릭 수 감소
-							tB--;
 							// when ball hit right or left of brick
 							if(ballposX + 19 <= brickRect.x || ballposX + 1 >= brickRect.x + brickRect.width) // 공이 브릭의 좌우에 부딫쳤을 경우
 							{
