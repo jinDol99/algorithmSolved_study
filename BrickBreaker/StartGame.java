@@ -14,35 +14,31 @@ public class StartGame extends JFrame {
 		JPanel panel = new JPanel();
 		JFrame jF = new JFrame();
 		button.setVisible(false);
-		panel.setVisible(false);
 		panel.add(button);
 		add(BorderLayout.SOUTH,panel);
 		setLayout(null);	
 		panel.setBackground(Color.black);
 		button.setBounds(400, 500, 150, 70);
 		add(button);
+		repaint();
+		button.setVisible(true);
+		setVisible(true);
 		button.addActionListener((e)->{
-			JFrame obj=new JFrame();
+			JFrame obj = new JFrame();
 			Gameplay gamePlay = new Gameplay();
 			obj.setBounds(0, 0, 1000, 700);
 			obj.setTitle("Breakout Ball");
 			obj.setResizable(true);
-			obj.setVisible(false);
+			obj.setVisible(true);
 			obj.setLocationRelativeTo(null);
 			obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			obj.add(gamePlay);
-			obj.repaint();
-
+			setVisible(false);
 		}); 
 		setTitle("start");
 		setSize(1000,700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		repaint();
-		button.setVisible(true);
-		panel.setVisible(true);
-		setVisible(true);
-		
 	}
 	public void homeframe() {
 		setTitle("1"); 
