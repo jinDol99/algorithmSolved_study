@@ -42,6 +42,8 @@ public class RetryGame extends JFrame {
 	}
 	public void paint(Graphics g)
 	{
+		g.setColor(Color.black);
+		g.fillRect(1, 1, 1000, 700);
 		g.setColor(Color.white);
         g.setFont(new Font("serif",Font.BOLD, 50));
         g.drawString("Retry?", 435,300);

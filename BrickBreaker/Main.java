@@ -65,7 +65,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
              ballXdir = 0; // 공의 X 이동을 0으로 (정지)
      		 ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
      		 setVisible(false);
-             new RetryGame();
+     		 new RetryGame();
 		}
 		
 		// when you lose the game
@@ -75,7 +75,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
              ballXdir = 0; // 공의 X 이동을 0으로 (정지)
      		 ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
      		 setVisible(false);
-             new RetryGame();
+     		 new RetryGame();
         }
 		g.dispose(); // 현재의 Frame만 종료
 	}
