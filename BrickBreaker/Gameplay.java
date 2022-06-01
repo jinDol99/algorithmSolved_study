@@ -1,5 +1,5 @@
 package BrickBreaker;
-import java.util.*;
+/*import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.Timer;
 public class Gameplay extends JPanel implements KeyListener, ActionListener
 {
-	// s
 	private boolean play = false; // 게임 시작 전
 	private int score = 0; // 점수
 	private int totalBricks = 48; // 공의 전체 갯수(남아있는 갯수)
@@ -20,7 +19,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener
 	private int ballYdir = -2; // 공의 Y 방향 이동의 속도(숫자가 커질수록 커짐)
 	private MapGenerator map; 
 	public Gameplay()
-	{		
+	{
 		map = new MapGenerator(4, 12); // 브릭의 갯수(세로 갯수, 가로 갯수)
 		addKeyListener(this);
 		setFocusable(true);
@@ -29,7 +28,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener
 		timer.start();
 	}
 	public void paint(Graphics g) // 각종 컴포넌트의 설정
-	{    		
+	{
 		// background
 		g.setColor(Color.black); // 배경의 색깔
 		g.fillRect(1, 1, 692, 592); // 배경의 색깔 범위(서쪽,북쪽, 동쪽,남쪽 좌표)
@@ -49,7 +48,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener
 		g.drawString(""+score, 590,30); // (기본 점수, 점수 X 좌표, Y 좌표)
 		
 		// the paddle
-		g.setColor(Color.green); // 스틱 색깔
+		g.setColor(Color.yellow); // 스틱 색깔
 		g.fillRect(playerX, 550, 100, 8); 
 		// 스틱 좌표(X 좌표, Y 좌표, 길이, 두께)
 		
@@ -223,8 +222,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener
 			if(ballposX > 670) // 만약 공이 오른쪽 벽에 부딫친다면
 			{
 				ballXdir = -ballXdir;  // 공의 좌우 방향 반전
-			}		
-			repaint();		
+			}
+			repaint();
 		}
 	}
 }
+*/
