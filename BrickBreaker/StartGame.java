@@ -49,6 +49,7 @@ public class StartGame extends JFrame {
 		g.drawImage(background, 0, 0, null);
 	}
 	public static void main(String[] args) {
-		 new StartGame();
+		 new StartGame(); 
 	}
+	// 11
 }
