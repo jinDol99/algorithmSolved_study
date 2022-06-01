@@ -32,15 +32,6 @@ public class StartGame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	public void homeframe() {
-		setTitle("1"); 
-		setSize(1000,700);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setLayout(null);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
 	public void paint(Graphics g) {
 		g.drawImage(background, 0, 0, null);
 	}
