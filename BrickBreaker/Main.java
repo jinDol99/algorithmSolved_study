@@ -3,8 +3,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 class Gameplay extends JPanel implements KeyListener, ActionListener
-{ //ㅁㅁ
-	public boolean play = false; // 게임 시작 전
+{
+	private boolean play = false; // 게임 시작 전
 	private int score = 0; // 점수
 	private int totalBricks = 10; // 블럭의 전체 갯수(남아있는 갯수)
 	private Timer timer; // 타이머
@@ -18,6 +18,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	private int pl = 100;
 	private boolean direction = false;
 	public static int stage = 1;
+	private static int temp = stage;
+	private static int speed = 4;
 	private boolean _chkLose = true;
 	public Gameplay()
 	{
@@ -84,7 +86,10 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		playerX = 500; // 스틱의 X 좌표 위치로 재설정
 		score = 0; // 점수 0으로 재설정
 		totalBricks = 24; // 전체 브릭은 21개로
-		stage++;
+		stage = 2;
+		temp = stage;
+		speed = 5;
+		pl = 90;
 		map = new MapGene(4, 6); 
 		// 브릭 세로로 3개, 가로로 7개 해서 총 21개
 		play = false;
@@ -98,7 +103,10 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		playerX = 500; // 스틱의 X 좌표 위치로 재설정
 		score = 0; // 점수 0으로 재설정
 		totalBricks = 48; // 전체 브릭은 21개로
-		stage++;
+		stage = 3;
+		temp = stage;
+		speed = 6;
+		pl = 80;
 		map = new MapGene(8, 6); 
 		// 브릭 세로로 3개, 가로로 7개 해서 총 21개
 		play = false;
@@ -137,7 +145,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		g.fillOval(700, -150, 500, 500);
 		g.setColor(Color.yellow);
 		g.fillRect(-140, 550, 500, 200);
-		stage = 1; // 스테이지 초기화
+		stage = 0; // 스테이지 초기화
 		//setVisible(true);
 		
 	}
@@ -177,7 +185,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
         }		
 	}
 	public void restart() {
-		if(!play) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
+		if(!play & temp == 1) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
 		{
 			//setVisible(false);
 			ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
@@ -186,11 +194,15 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			ballYdir = 2; // 공의 Y 좌표 이동
 			playerX = 500; // 스틱의 X 좌표 위치로 재설정
 			score = 0; // 점수 0으로 재설정
+			stage = temp;
 			totalBricks = 10; // 전체 브릭은 24개로
 			map = new MapGene(2, 5);
 			repaint();
 			setVisible(true);
-		}
+		} else if (!play & temp == 2)
+			win();
+		else if (!play & temp == 3)
+			win2();
 	}
 	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
@@ -218,9 +230,9 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
 				ballYdir = -ballYdir; // 공의 위아래 움직임 반전
 				if (direction == true)
-					ballXdir = -5; // 공의 좌우 움직임 속도를 낮춤
+					ballXdir = -speed; // 공의 좌우 움직임 속도를 낮춤
 				else if (direction == false)
-					ballXdir = 5;
+					ballXdir = speed;
 			}
 			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 70, 650, pl, 8)))
 			{
