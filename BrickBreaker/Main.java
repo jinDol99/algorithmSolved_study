@@ -88,7 +88,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		totalBricks = 24; // 전체 브릭은 21개로
 		stage = 2;
 		temp = stage;
-		speed = 5;
+		speed = 6;
 		pl = 90;
 		map = new MapGene(4, 6); 
 		// 브릭 세로로 3개, 가로로 7개 해서 총 21개
@@ -105,7 +105,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		totalBricks = 48; // 전체 브릭은 21개로
 		stage = 3;
 		temp = stage;
-		speed = 6;
+		speed = 8;
 		pl = 80;
 		map = new MapGene(8, 6); 
 		// 브릭 세로로 3개, 가로로 7개 해서 총 21개
