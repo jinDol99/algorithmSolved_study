@@ -6,7 +6,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 {
 	public boolean play = false; // 게임 시작 전
 	private int score = 0; // 점수
-	private int totalBricks = 24; // 블럭의 전체 갯수(남아있는 갯수)
+	private int totalBricks = 10; // 블럭의 전체 갯수(남아있는 갯수)
 	private Timer timer; // 타이머
 	private int delay = 8; // 공 속도(숫자가 작을수록 딜레이가 덜 걸려 빨라짐)
 	private int playerX = 500; // 스틱의 X 좌표
@@ -17,10 +17,10 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	private MapGene map;
 	private int pl = 100;
 	private boolean direction = false;
-	public static int stop = 1;
+	public static int stage = 1;
 	public Gameplay()
 	{
-		map = new MapGene(4, 6); // 브릭의 갯수(세로 갯수, 가로 갯수)
+		map = new MapGene(2, 5); // 브릭의 갯수(세로 갯수, 가로 갯수)
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -45,8 +45,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		// the scores 		
 		g.setColor(Color.white); // 점수 색깔
 		g.setFont(new Font("serif",Font.BOLD, 25)); // 점수 폰트 및 크기
+		g.drawString("Stage : "+stage, 450,30);
 		g.drawString("Score : "+score, 850,30); // (기본 점수, 점수 X 좌표, Y 좌표)
-		
 		// the paddle
 		g.setColor(Color.yellow); // 스틱 색깔
 		g.fillRect(playerX, 650, pl, 8); 
@@ -58,9 +58,14 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		// (공의 X 좌표, 공의 Y 좌표, 공의 좌우 길이, 공의 상하 길이)
 		// when you won the game
 		if(totalBricks <= 0) // 남은 브릭의 갯수가 0개 이하일때(승리시)
-			{
+		{
+			if (stage == 1)
 				win();
-			}
+			else if (stage == 2)
+				win2();
+			else
+				win3(g);
+		}
 		// when you lose the game
 		if(ballposY > 670) // 공이 바닥 아래로 내려갔을 때(패배시)
 		    {
@@ -75,11 +80,40 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		ballYdir = 2; // 공의 Y 좌표 이동
 		playerX = 500; // 스틱의 X 좌표 위치로 재설정
 		score = 0; // 점수 0으로 재설정
-		totalBricks = 40; // 전체 브릭은 21개로
-		map = new MapGene(5, 8); 
+		totalBricks = 24; // 전체 브릭은 21개로
+		stage++;
+		map = new MapGene(4, 6); 
 		// 브릭 세로로 3개, 가로로 7개 해서 총 21개
 		play = false;
 		repaint(); // 재시작
+	}
+	public void win2() {
+		ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
+		ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
+		ballXdir = -1; // 공의 X 좌표 이동
+		ballYdir = 2; // 공의 Y 좌표 이동
+		playerX = 500; // 스틱의 X 좌표 위치로 재설정
+		score = 0; // 점수 0으로 재설정
+		totalBricks = 48; // 전체 브릭은 21개로
+		stage++;
+		map = new MapGene(8, 6); 
+		// 브릭 세로로 3개, 가로로 7개 해서 총 21개
+		play = false;
+		repaint(); // 재시작
+	}
+	public void win3(Graphics g) {
+		g.setColor(Color.black);
+		g.fillRect(1, 1, 1000, 700);
+		g.setColor(Color.white);
+        g.setFont(new Font("serif",Font.BOLD, 50));
+        g.drawString("Congraturation", 435,300);
+        g.setFont(new Font("serif",Font.BOLD, 70));
+        g.drawString("Game Clear!!", 250,400);
+        g.setColor(Color.red);
+		g.fillOval(700, -150, 500, 500);
+		g.setColor(Color.yellow);
+		g.fillRect(-140, 550, 500, 200);
+		setVisible(true);
 	}
 	public void lose(Graphics g) {
 		play = false;
@@ -125,22 +159,24 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
         }
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) // Enter를 눌렀을 때
 		{
-			if(!play) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
-			{
-				setVisible(false);
-				play = true;
-				ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
-				ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
-				ballXdir = -1; // 공의 X 좌표 이동
-				ballYdir = 2; // 공의 Y 좌표 이동
-				playerX = 500; // 스틱의 X 좌표 위치로 재설정
-				score = 0; // 점수 0으로 재설정
-				totalBricks = 24; // 전체 브릭은 24개로
-				map = new MapGene(4, 6);
-				repaint();
-				setVisible(true);
-			}
+			restart();
         }		
+	}
+	public void restart() {
+		if(!play) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
+		{
+			setVisible(false);
+			ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
+			ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
+			ballXdir = -1; // 공의 X 좌표 이동
+			ballYdir = 2; // 공의 Y 좌표 이동
+			playerX = 500; // 스틱의 X 좌표 위치로 재설정
+			score = 0; // 점수 0으로 재설정
+			totalBricks = 24; // 전체 브릭은 24개로
+			map = new MapGene(4, 6);
+			repaint();
+			setVisible(true);
+		}
 	}
 	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
@@ -168,9 +204,9 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
 				ballYdir = -ballYdir; // 공의 위아래 움직임 반전
 				if (direction == true)
-					ballXdir = -2; // 공의 좌우 움직임 속도를 낮춤
+					ballXdir = -5; // 공의 좌우 움직임 속도를 낮춤
 				else if (direction == false)
-					ballXdir = 2;
+					ballXdir = 5;
 			}
 			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 70, 650, pl, 8)))
 			{
