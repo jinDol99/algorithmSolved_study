@@ -18,6 +18,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	private int pl = 100;
 	private boolean direction = false;
 	public static int stage = 1;
+	private boolean _chkLose = true;
 	public Gameplay()
 	{
 		map = new MapGene(2, 5); // 브릭의 갯수(세로 갯수, 가로 갯수)
@@ -69,10 +70,12 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		// when you lose the game
 		if(ballposY > 670) // 공이 바닥 아래로 내려갔을 때(패배시)
 		    {
+				//repaint();
 			    lose(g);
-		     }
+		    }
 		g.dispose();
 	}
+	
 	public void win() {
 		ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
 		ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
@@ -116,10 +119,12 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		setVisible(true);
 	}
 	public void lose(Graphics g) {
+		
+		_chkLose = false; // 시작 시 엔터 키 누르는거 방지 -> 유효성체크 필
 		play = false;
         ballXdir = 0; // 공의 X 이동을 0으로 (정지)
         ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-        setVisible(false);
+        //setVisible(false);
         // new RetryGame();
 		g.setColor(Color.black);
 		g.fillRect(1, 1, 1000, 700);
@@ -127,16 +132,20 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
         g.setFont(new Font("serif",Font.BOLD, 50));
         g.drawString("Retry?", 435,300);
         g.drawString("Press Enter to Restart", 250,375);
+        
         g.setColor(Color.red);
 		g.fillOval(700, -150, 500, 500);
 		g.setColor(Color.yellow);
 		g.fillRect(-140, 550, 500, 200);
-		setVisible(true);
+		stage = 1; // 스테이지 초기화
+		//setVisible(true);
+		
 	}
 	public void keyPressed(KeyEvent e) // 특정 키를 눌렀을때
 	{
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) // 오른쪽 방향키 입력
 		{        
+			System.out.println("오른쪽");
 			if(playerX >= 880) // 스틱이 오른쪽 벽에 닿아있으면
 			{
 				playerX = 880; // 그 자리 그대로
@@ -148,6 +157,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
         }
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) // 왼쪽 방향키 입력
 		{
+			System.out.println("왼쪽");
 			if(playerX < 10) // 스틱이 왼쪽 벽에 닿아있으면
 			{
 				playerX = 10; // 그 자리 그대로
@@ -159,21 +169,25 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
         }
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) // Enter를 눌렀을 때
 		{
+			if(_chkLose) return;
+			
+			System.out.println("엔터");
+			// 유효성 추가 -> 게임 시작시 엔터 누르면 바로 다음 스테이지 진행
 			restart();
         }		
 	}
 	public void restart() {
 		if(!play) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
 		{
-			setVisible(false);
+			//setVisible(false);
 			ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
 			ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
 			ballXdir = -1; // 공의 X 좌표 이동
 			ballYdir = 2; // 공의 Y 좌표 이동
 			playerX = 500; // 스틱의 X 좌표 위치로 재설정
 			score = 0; // 점수 0으로 재설정
-			totalBricks = 24; // 전체 브릭은 24개로
-			map = new MapGene(4, 6);
+			totalBricks = 10; // 전체 브릭은 24개로
+			map = new MapGene(2, 5);
 			repaint();
 			setVisible(true);
 		}
@@ -273,6 +287,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		}
 	}
 }
+
 class MapGene {
 	public int map[][]; // 브릭 생성을 위한 배열
 	public int brickWidth; // 브릭의 가로
