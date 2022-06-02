@@ -1,15 +1,12 @@
 package BrickBreaker;
 import java.awt.*;
 import javax.swing.*;
-import java.util.*;
 import java.awt.event.*;
-import javax.swing.Timer;
 class Gameplay extends JPanel implements KeyListener, ActionListener
 {
-	
 	public boolean play = false; // 게임 시작 전
 	private int score = 0; // 점수
-	private int totalBricks = 48; // 블럭의 전체 갯수(남아있는 갯수)
+	private int totalBricks = 24; // 블럭의 전체 갯수(남아있는 갯수)
 	private Timer timer; // 타이머
 	private int delay = 8; // 공 속도(숫자가 작을수록 딜레이가 덜 걸려 빨라짐)
 	private int playerX = 500; // 스틱의 X 좌표
@@ -20,9 +17,10 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	private MapGene map;
 	private int pl = 100;
 	private boolean direction = false;
+	public static int stop = 1;
 	public Gameplay()
 	{
-		map = new MapGene(6, 8); // 브릭의 갯수(세로 갯수, 가로 갯수)
+		map = new MapGene(4, 6); // 브릭의 갯수(세로 갯수, 가로 갯수)
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -61,11 +59,17 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		// when you won the game
 		if(totalBricks <= 0) // 남은 브릭의 갯수가 0개 이하일때(승리시)
 			{
+				ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
+				ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
+				ballXdir = -1; // 공의 X 좌표 이동
+				ballYdir = 2; // 공의 Y 좌표 이동
+				playerX = pl; // 스틱의 X 좌표 위치로 재설정
+				score = 0; // 점수 0으로 재설정
+				totalBricks = 40; // 전체 브릭은 21개로
+				map = new MapGene(5, 8); 
+				// 브릭 세로로 3개, 가로로 7개 해서 총 21개
 				play = false;
-		        ballXdir = 0; // 공의 X 이동을 0으로 (정지)
-		     	ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-		     	new RetryGame();
-		     	setVisible(false);
+				repaint(); // 재시작
 			}
 		// when you lose the game
 		if(ballposY > 670) // 공이 바닥 아래로 내려갔을 때(패배시)
@@ -73,10 +77,21 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			    play = false;
 		        ballXdir = 0; // 공의 X 이동을 0으로 (정지)
 		        ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-		     	new RetryGame();
-		     	setVisible(false);
+		        setVisible(false);
+		        // new RetryGame();
+				g.setColor(Color.black);
+				g.fillRect(1, 1, 1000, 700);
+				g.setColor(Color.white);
+		        g.setFont(new Font("serif",Font.BOLD, 50));
+		        g.drawString("Retry?", 435,300);
+		        g.drawString("Press Enter to Restart", 250,375);
+		        g.setColor(Color.red);
+				g.fillOval(700, -150, 500, 500);
+				g.setColor(Color.yellow);
+				g.fillRect(-140, 550, 500, 200);
+				setVisible(true);
 		     }
-		g.dispose(); // 현재의 Frame만 종료
+		g.dispose();
 	}
 	public void keyPressed(KeyEvent e) // 특정 키를 눌렀을때
 	{
@@ -92,7 +107,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			}
         }
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) // 왼쪽 방향키 입력
-		{          
+		{
 			if(playerX < 10) // 스틱이 왼쪽 벽에 닿아있으면
 			{
 				playerX = 10; // 그 자리 그대로
@@ -102,7 +117,24 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 				moveLeft(); // 스틱의 왼쪽 이동
 			}
         }
-		
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) // Enter를 눌렀을 때
+		{
+			if(!play) // 게임이 플레이 되지 않고 있는 상황(죽었을 때)
+			{
+				setVisible(false);
+				play = true;
+				ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
+				ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
+				ballXdir = -1; // 공의 X 좌표 이동
+				ballYdir = 2; // 공의 Y 좌표 이동
+				playerX = 500; // 스틱의 X 좌표 위치로 재설정
+				score = 0; // 점수 0으로 재설정
+				totalBricks = 24; // 전체 브릭은 24개로
+				map = new MapGene(4, 6);
+				repaint();
+				setVisible(true);
+			}
+        }		
 	}
 	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
@@ -138,7 +170,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			{
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
 				ballYdir = -ballYdir; // 공의 위아래 움직임 반전
-				ballXdir = ballXdir + 1; // 공의 좌우 움직임 속도를 올림
+				ballXdir = ballXdir + 3; // 공의 좌우 움직임 속도를 올림
 			}
 			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 30, 650, pl, 8)))
 			{ 
@@ -194,8 +226,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 			if(ballposX > 970) // 만약 공이 오른쪽 벽에 부딫친다면
 			{
 				ballXdir = -ballXdir;  // 공의 좌우 방향 반전
-			}		
-			repaint();		
+			}
+			repaint();	
 		}
 	}
 }
@@ -251,8 +283,9 @@ public class Main {
 		obj.setResizable(true); // 게임창의 크기 조절 불가능
 		obj.setVisible(true); // 창 보임
 		obj.setLocationRelativeTo(null);
-		obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창을 닫았을 때 메모리에서도 삭제
+		obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // 창을 닫았을 때 메모리에서도 삭제
 		obj.add(gamePlay);
+		
 	}
 	public static void main(String[] args) {
 		new Main();
