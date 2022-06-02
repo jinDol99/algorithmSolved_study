@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 class Gameplay extends JPanel implements KeyListener, ActionListener
-{
+{ //ㅁ
 	public boolean play = false; // 게임 시작 전
 	private int score = 0; // 점수
 	private int totalBricks = 10; // 블럭의 전체 갯수(남아있는 갯수)
