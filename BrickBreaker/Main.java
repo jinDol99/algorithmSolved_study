@@ -59,39 +59,45 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 		// when you won the game
 		if(totalBricks <= 0) // 남은 브릭의 갯수가 0개 이하일때(승리시)
 			{
-				ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
-				ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
-				ballXdir = -1; // 공의 X 좌표 이동
-				ballYdir = 2; // 공의 Y 좌표 이동
-				playerX = pl; // 스틱의 X 좌표 위치로 재설정
-				score = 0; // 점수 0으로 재설정
-				totalBricks = 40; // 전체 브릭은 21개로
-				map = new MapGene(5, 8); 
-				// 브릭 세로로 3개, 가로로 7개 해서 총 21개
-				play = false;
-				repaint(); // 재시작
+				win();
 			}
 		// when you lose the game
 		if(ballposY > 670) // 공이 바닥 아래로 내려갔을 때(패배시)
 		    {
-			    play = false;
-		        ballXdir = 0; // 공의 X 이동을 0으로 (정지)
-		        ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
-		        setVisible(false);
-		        // new RetryGame();
-				g.setColor(Color.black);
-				g.fillRect(1, 1, 1000, 700);
-				g.setColor(Color.white);
-		        g.setFont(new Font("serif",Font.BOLD, 50));
-		        g.drawString("Retry?", 435,300);
-		        g.drawString("Press Enter to Restart", 250,375);
-		        g.setColor(Color.red);
-				g.fillOval(700, -150, 500, 500);
-				g.setColor(Color.yellow);
-				g.fillRect(-140, 550, 500, 200);
-				setVisible(true);
+			    lose(g);
 		     }
 		g.dispose();
+	}
+	public void win() {
+		ballposX = 500; // 공의 X 좌표 기본 위치로 재설정
+		ballposY = 600; // 공의 Y 좌표 기본 위치로 재설정
+		ballXdir = -1; // 공의 X 좌표 이동
+		ballYdir = 2; // 공의 Y 좌표 이동
+		playerX = 500; // 스틱의 X 좌표 위치로 재설정
+		score = 0; // 점수 0으로 재설정
+		totalBricks = 40; // 전체 브릭은 21개로
+		map = new MapGene(5, 8); 
+		// 브릭 세로로 3개, 가로로 7개 해서 총 21개
+		play = false;
+		repaint(); // 재시작
+	}
+	public void lose(Graphics g) {
+		play = false;
+        ballXdir = 0; // 공의 X 이동을 0으로 (정지)
+        ballYdir = 0; // 공의 Y 이동을 0으로 (정지)
+        setVisible(false);
+        // new RetryGame();
+		g.setColor(Color.black);
+		g.fillRect(1, 1, 1000, 700);
+		g.setColor(Color.white);
+        g.setFont(new Font("serif",Font.BOLD, 50));
+        g.drawString("Retry?", 435,300);
+        g.drawString("Press Enter to Restart", 250,375);
+        g.setColor(Color.red);
+		g.fillOval(700, -150, 500, 500);
+		g.setColor(Color.yellow);
+		g.fillRect(-140, 550, 500, 200);
+		setVisible(true);
 	}
 	public void keyPressed(KeyEvent e) // 특정 키를 눌렀을때
 	{
@@ -141,13 +147,13 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	public void moveRight() // 오른쪽 방향키 눌렀을 때의 메소드
 	{
 		 // 스틱을 오른쪽으로 이동
-			play = true; // 플레이중이라면
+			play = true; // 스타트
 			playerX+=20;
 			direction = false;
 	}
 	public void moveLeft() // 왼쪽 방향키 눌렀을 때의 메솓,
 	{
-			play = true; // 플레이중이라면
+			play = true; // 스타트
 			playerX-=20;
 			direction = true;
 	}
@@ -156,7 +162,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener
 	{
 		timer.start(); // 타이머 스타트
 		if(play) // 플레이중이라면
-		{			
+		{
 			if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 650, pl, 8))) 
 			{
 				// 내부 영역이 지정된 구형 영역의 내부 영역과 교차할지 어떨지를 판정합니다.(intersects)
