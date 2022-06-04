@@ -69,7 +69,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 			} catch(Exception Object) {
 			}
 			if (stage == 1)
-				win();
+				win3(g);
 			else if (stage == 2)
 				win2();
 			else
@@ -119,6 +119,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		repaint();
 	}
 	public void win3(Graphics g) { // 마지막 스테이지 클리어시
+		play = false;
 		g.setColor(Color.black);
 		g.fillRect(1, 1, 1000, 700);
 		g.setColor(Color.white);
@@ -130,7 +131,6 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillOval(700, -150, 500, 500);
 		g.setColor(Color.yellow);
 		g.fillRect(-140, 550, 500, 200);
-		temp = 1;
 		setVisible(true);
 	}
 	public void lose(Graphics g) { // 패배시
