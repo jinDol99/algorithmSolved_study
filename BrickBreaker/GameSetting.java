@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 public class GameSetting {
-	public GameSetting() {
+	public GameSetting() { // 게임창 생성과 기초 설정
 		JFrame obj=new JFrame();
 		Gameplay gamePlay = new Gameplay();
 		obj.setBounds(0, 0, 1000, 700);

@@ -2,7 +2,7 @@ package BrickBreaker;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-class MapGenerator {
+class MapGenerator { // 블록 생성
 	public int map[][];
 	public int brickWidth;
 	public int brickHeight;
