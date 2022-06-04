@@ -1,5 +1,5 @@
 package BrickBreaker;
-import java.awt.BorderLayout;
+/*import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -38,4 +38,4 @@ public class StartGame extends JFrame {
 	public static void main(String[] args) {
 		 new StartGame(); 
 	}
-}
+}*/
