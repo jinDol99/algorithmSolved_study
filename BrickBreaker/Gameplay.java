@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 class Gameplay extends JPanel implements KeyListener, ActionListener {
@@ -28,6 +30,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private static int temp = stage;
 	private static int speed = 4;
 	private boolean _chkLose = true;
+	JButton nextLevel = new JButton("next Level");
 	public Gameplay() { // 추가 설정을 위한 코드
 		map = new MapGenerator(2, 5);
 		addKeyListener(this);
@@ -115,6 +118,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillOval(700, -150, 500, 500);
 		g.setColor(Color.yellow);
 		g.fillRect(-140, 550, 500, 200);
+		temp = 1;
 		setVisible(true);
 	}
 	public void lose(Graphics g) { // 패배시
@@ -136,7 +140,6 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 	}
 	public void keyPressed(KeyEvent e) { // 각종 키보드 클릭시 처리 코드
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) { // 오른쪽 방향키 클릭 
-			System.out.println("오른쪽");
 			if(playerX >= 880) {
 				playerX = 880;
 			}
@@ -145,7 +148,6 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 			}
         }
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) { // 왼쪽 방향키 클릭
-			System.out.println("왼쪽");
 			if(playerX < 10) {
 				playerX = 10;
 			}
@@ -155,7 +157,6 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
         }
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) { // 엔터 클릭
 			if(_chkLose) return;
-			System.out.println("엔터");
 			restart();
         }		
 	}

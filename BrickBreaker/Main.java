@@ -16,7 +16,7 @@ public class Main extends JFrame {
 		button.setVisible(false);
 		panel.add(button);
 		add(BorderLayout.SOUTH,panel);
-		setLayout(null);	
+		setLayout(null);
 		panel.setBackground(Color.black);
 		button.setBounds(400, 500, 150, 70);
 		add(button);
