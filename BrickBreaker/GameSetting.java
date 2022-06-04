@@ -11,7 +11,7 @@ public class GameSetting {
 		obj.setResizable(true);
 		obj.setVisible(true);
 		obj.setLocationRelativeTo(null);
-		obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		obj.add(gamePlay);
 	}
 	public static void main(String[] args) {
