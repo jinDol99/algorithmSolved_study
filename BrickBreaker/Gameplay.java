@@ -63,16 +63,22 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 
 		if(totalBricks <= 0) { // 승리시
 			LevelUp test = new LevelUp();
+			if (stage == 1) {
 			try {
 				test.LevelUp();
 				Thread.sleep(0);
 			} catch(Exception Object) {
 			}
-			if (stage == 1)
-				win3(g);
-			else if (stage == 2)
+				win();
+			}
+			else if (stage == 2) {
+				try {
+					test.LevelUp();
+					Thread.sleep(0);
+				} catch(Exception Object) {
+				}
 				win2();
-			else
+			} else
 				win3(g);
 		}
 		if(ballposY > 670) { // 패배시
@@ -124,9 +130,9 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(1, 1, 1000, 700);
 		g.setColor(Color.white);
         g.setFont(new Font("serif",Font.BOLD, 50));
-        g.drawString("Congraturation", 435,300);
+        g.drawString("Congraturation", 310,270);
         g.setFont(new Font("serif",Font.BOLD, 70));
-        g.drawString("Game Clear!!", 250,400);
+        g.drawString("Game Clear!!", 275,350);
         g.setColor(Color.red);
 		g.fillOval(700, -150, 500, 500);
 		g.setColor(Color.yellow);

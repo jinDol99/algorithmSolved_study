@@ -26,7 +26,7 @@ public class Main extends JFrame {
 		button.addActionListener((e)->{
 			new GameSetting();
 			setVisible(false);
-		}); 
+		});
 		setTitle("start");
 		setSize(1000,700);
 		setLocationRelativeTo(null);
