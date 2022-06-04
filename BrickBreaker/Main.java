@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class Main extends JFrame {
 	private JButton button = new JButton("Start");
 	private Image background=new ImageIcon(Main.class.getResource("unknown.png")).getImage();
-	public Main() {
+	public Main() { // 게임 시작창 및 시작 버튼 생성
 		JPanel panel = new JPanel();
 		JFrame jF = new JFrame();
 		button.setVisible(false);
@@ -35,7 +35,7 @@ public class Main extends JFrame {
 	public void paint(Graphics g) {
 		g.drawImage(background, 0, 0, null);
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) { // 게임 시작
 		 new Main(); 
 	}
 }

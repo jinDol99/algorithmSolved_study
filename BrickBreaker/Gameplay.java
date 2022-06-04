@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
 class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private boolean play = false;
 	private int score = 0;
@@ -29,7 +28,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private static int temp = stage;
 	private static int speed = 4;
 	private boolean _chkLose = true;
-	public Gameplay() {
+	public Gameplay() { // 추가 설정을 위한 코드
 		map = new MapGenerator(2, 5);
 		addKeyListener(this);
 		setFocusable(true);
@@ -37,8 +36,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
         timer=new Timer(delay,this);
 		timer.start();
 	}
-	public void paint(Graphics g) {
-		g.setColor(Color.black);
+	public void paint(Graphics g) { // 각종 컴포넌트의 설정 및 그리기 코드
+		g.setColor(Color.black); // 색깔 별로 필요한 컴포넌트들 설정
 		g.fillRect(1, 1, 1000, 700);
 
 		map.draw((Graphics2D) g);
@@ -59,7 +58,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.red);
 		g.fillOval(ballposX, ballposY, 20, 20);
 
-		if(totalBricks <= 0) {
+		if(totalBricks <= 0) { // 승리시
 			if (stage == 1)
 				win();
 			else if (stage == 2)
@@ -67,14 +66,12 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 			else
 				win3(g);
 		}
-
-		if(ballposY > 670)
-		    {
+		if(ballposY > 670) { // 패배시
 			    lose(g);
 		    }
 		g.dispose();
 	}
-	public void win() {
+	public void win() { // 첫스테이지 클리어시
 		ballposX = 500;
 		ballposY = 600;
 		ballXdir = -1;
@@ -90,7 +87,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		play = false;
 		repaint();
 	}
-	public void win2() {
+	public void win2() { // 두번째 스테이지 클리어시
 		ballposX = 500;
 		ballposY = 600;
 		ballXdir = -1;
@@ -106,7 +103,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		play = false;
 		repaint();
 	}
-	public void win3(Graphics g) {
+	public void win3(Graphics g) { // 마지막 스테이지 클리어시
 		g.setColor(Color.black);
 		g.fillRect(1, 1, 1000, 700);
 		g.setColor(Color.white);
@@ -120,7 +117,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(-140, 550, 500, 200);
 		setVisible(true);
 	}
-	public void lose(Graphics g) {
+	public void lose(Graphics g) { // 패배시
 		_chkLose = false;
 		play = false;
         ballXdir = 0;
@@ -137,8 +134,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillRect(-140, 550, 500, 200);
 		stage = 0;
 	}
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {        
+	public void keyPressed(KeyEvent e) { // 각종 키보드 클릭시 처리 코드
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) { // 오른쪽 방향키 클릭 
 			System.out.println("오른쪽");
 			if(playerX >= 880) {
 				playerX = 880;
@@ -147,7 +144,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 				moveRight();
 			}
         }
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) { // 왼쪽 방향키 클릭
 			System.out.println("왼쪽");
 			if(playerX < 10) {
 				playerX = 10;
@@ -156,14 +153,14 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 				moveLeft();
 			}
         }
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) { // 엔터 클릭
 			if(_chkLose) return;
 			System.out.println("엔터");
 			restart();
         }		
 	}
-	public void restart() {
-		if(!play & temp == 1) {
+	public void restart() { // 재시작시
+		if(!play & temp == 1) { // 첫번째 스테이지 재시작
 			ballposX = 500;
 			ballposY = 600;
 			ballXdir = -1;
@@ -175,24 +172,24 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 			map = new MapGenerator(2, 5);
 			repaint();
 			setVisible(true);
-		} else if (!play & temp == 2)
+		} else if (!play & temp == 2) // 두번째 스테이지 재시작
 			win();
-		else if (!play & temp == 3)
+		else if (!play & temp == 3) // 세번째 스테이지 재시작
 			win2();
 	}
-	public void keyReleased(KeyEvent e) {}
-	public void keyTyped(KeyEvent e) {}
-	public void moveRight() {
+	public void keyReleased(KeyEvent e) {} // 추상 메소드 구현
+	public void keyTyped(KeyEvent e) {} // 추상 메소드 구현
+	public void moveRight() { // 스틱 오른쪽으로 이동
 			play = true;
 			playerX+=20;
 			direction = false;
 	}
-	public void moveLeft() {
-			play = true; // 스타트
+	public void moveLeft() { // 스틱 왼쪽으로 이동
+			play = true;
 			playerX-=20;
 			direction = true;
 	}
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) { // 각종 컴포넌트의 이동 및 충돌 시 처리
 		timer.start();
 		if(play) {
 			if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 650, pl, 8))) {
@@ -209,12 +206,9 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 			else if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX + 30, 650, pl, 8))) { 
 				ballYdir = -ballYdir;
 			}	
-			A: for(int i = 0; i<map.map.length; i++)
-			{
-				for(int j =0; j<map.map[0].length; j++)
-				{				
-					if(map.map[i][j] > 0)
-					{
+			A: for(int i = 0; i<map.map.length; i++) {
+				for(int j =0; j<map.map[0].length; j++) {				
+					if(map.map[i][j] > 0) {
 						int brickX = j * map.brickWidth + 80;
 						int brickY = i * map.brickHeight + 50;
 						int brickWidth = map.brickWidth;
