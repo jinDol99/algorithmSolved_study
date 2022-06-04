@@ -24,7 +24,7 @@ public class Main extends JFrame {
 		button.setVisible(true);
 		setVisible(true);
 		button.addActionListener((e)->{
-			new Main();
+			new GameSetting();
 			setVisible(false);
 		}); 
 		setTitle("start");
