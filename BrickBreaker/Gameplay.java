@@ -62,6 +62,12 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.fillOval(ballposX, ballposY, 20, 20);
 
 		if(totalBricks <= 0) { // 승리시
+			LevelUp test = new LevelUp();
+			try {
+				test.LevelUp();
+				Thread.sleep(0);
+			} catch(Exception Object) {
+			}
 			if (stage == 1)
 				win();
 			else if (stage == 2)
@@ -70,6 +76,12 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 				win3(g);
 		}
 		if(ballposY > 670) { // 패배시
+			Fail test = new Fail();
+			try {
+				test.Fail();
+				Thread.sleep(3000);
+			} catch(Exception e) {
+			}
 			    lose(g);
 		    }
 		g.dispose();
@@ -218,7 +230,13 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 						Rectangle ballRect = new Rectangle(ballposX, ballposY, 20, 20);
 						Rectangle brickRect = rect;
 						if(ballRect.intersects(brickRect))
-						{					
+						{
+							Music test = new Music();
+							try {
+								test.Music();
+								Thread.sleep(0);
+							} catch(Exception Object) {
+							}
 							map.setBrickValue(0, i, j);
 							score+=5;
 							totalBricks--;

@@ -1,17 +1,17 @@
-package BrickBreaker; // 패키지명은 사용자 환경에 따라 달라질 수 있음
+package BrickBreaker;
 import java.io.File;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-public class Music {
-	public void Music() {
+public class LevelUp {
+	public void LevelUp() {
 		File bgm;
 		AudioInputStream stream;
 		AudioFormat format;
 		DataLine.Info info;
-		bgm = new File("..//algorithmSolved_study/BrickBreaker/break.wav"); // 사용시에는 개별 폴더로 변경할 것
+		bgm = new File("..//algorithmSolved_study/BrickBreaker/levelUp.WAV"); // 사용시에는 개별 폴더로 변경할 것
 		Clip clip;
 		try {
 			stream = AudioSystem.getAudioInputStream(bgm);
@@ -25,9 +25,9 @@ public class Music {
 			}
 	}
 	public static void main(String[] args) {
-		Music test = new Music();
+		LevelUp test = new LevelUp();
 			try {
-				test.Music();
+				test.LevelUp();
 				Thread.sleep(3000);
 			} catch(Exception e) {
 			}
