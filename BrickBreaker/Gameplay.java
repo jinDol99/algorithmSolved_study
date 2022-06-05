@@ -30,14 +30,25 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 	private static int temp = stage;
 	private static int speed = 4;
 	private boolean _chkLose = true;
-	JButton nextLevel = new JButton("next Level");
+/*	JButton nextLevel = new JButton("next Level");
+	JPanel panel = new JPanel();*/
 	public Gameplay() { // 추가 설정을 위한 코드
 		map = new MapGenerator(2, 5);
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
+		setLayout(null);
         timer=new Timer(delay,this);
 		timer.start();
+		/*nextLevel.setBounds(10, 10, 50, 30);
+		add(nextLevel);
+		setVisible(true);
+		nextLevel.addActionListener((e)->{
+			if (play == false)
+			totalBricks=0;
+			repaint();
+			return;
+		});*/
 	}
 	public void paint(Graphics g) { // 각종 컴포넌트의 설정 및 그리기 코드
 		g.setColor(Color.black); // 색깔 별로 필요한 컴포넌트들 설정
@@ -89,7 +100,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 			} catch(Exception e) {
 			}
 			    lose(g);
-		    }
+		}
 		g.dispose();
 	}
 	public void win() { // 첫스테이지 클리어시
@@ -176,7 +187,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) { // 엔터 클릭
 			if(_chkLose) return;
 			restart();
-        }		
+        }
+		
 	}
 	public void restart() { // 재시작시
 		if(!play & temp == 1) { // 첫번째 스테이지 재시작
@@ -268,8 +280,10 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 			if(ballposX > 970) {
 				ballXdir = -ballXdir;
 			}
+			
 			repaint();	
 		}
+		
 	}
 }
 /*import java.util.*;

@@ -13,7 +13,7 @@ class MapGenerator { // 블록 생성
 				map[i][j] = 1;
 		brickWidth = 800/col;
 		brickHeight = 150/row;
-	}	
+	}
 	public void draw(Graphics2D g) {
 		for(int i = 0; i<map.length; i++) {
 			for(int j =0; j<map[0].length; j++) {
