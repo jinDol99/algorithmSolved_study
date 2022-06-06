@@ -109,7 +109,6 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		ballXdir = -1;
 		ballYdir = 2;
 		playerX = 500;
-		score = 0;
 		totalBricks = 24;
 		stage = 2;
 		temp = stage;
@@ -125,7 +124,6 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		ballXdir = -1;
 		ballYdir = 2;
 		playerX = 500;
-		score = 0;
 		totalBricks = 48;
 		stage = 3;
 		temp = stage;
@@ -144,6 +142,8 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.drawString("Congraturation", 310,270);
         g.setFont(new Font("serif",Font.BOLD, 70));
         g.drawString("Game Clear!!", 275,350);
+        g.setFont(new Font("serif",Font.BOLD, 50));
+        g.drawString("Your Score : " + score, 310, 420);
         g.setColor(Color.red);
 		g.fillOval(700, -150, 500, 500);
 		g.setColor(Color.yellow);
@@ -166,6 +166,7 @@ class Gameplay extends JPanel implements KeyListener, ActionListener {
 		g.setColor(Color.yellow);
 		g.fillRect(-140, 550, 500, 200);
 		stage = 0;
+		score = 0;
 	}
 	public void keyPressed(KeyEvent e) { // 각종 키보드 클릭시 처리 코드
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) { // 오른쪽 방향키 클릭 
